@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Sign in · CodeMind AI{% endblock %}
+{% block public_content %}
+<div class="login-page">
+  <section class="login-visual">
+    <a class="brand light" href="#"><span class="brand-mark">C</span><span>CodeMind <small>AI WORKSPACE</small></span></a>
+    <div class="visual-copy">
+      <div class="eyebrow"><span></span> YOUR ENGINEERING COPILOT</div>
+      <h1>Build smarter.<br><em>Ship with confidence.</em></h1>
+      <p>A focused workspace to write, run, analyze, and test your code — all in one place.</p>
+      <div class="hero-art"><img src="{{ url_for('static', filename='img/codemind-hero.svg') }}" alt="Illustration of a developer workspace with code panels and connected nodes"></div>
+      <div class="visual-footer"><span>✳ Built for curious minds</span><span>01 — 06</span></div>
+    </div>
+  </section>
+  <section class="login-panel">
+    <div class="mobile-brand brand"><span class="brand-mark">C</span><span>CodeMind <small>AI WORKSPACE</small></span></div>
+    <div class="login-card">
+      <div class="welcome-icon">⌘</div>
+      <div class="eyebrow dark-eyebrow">WELCOME BACK</div>
+      <h2>Sign in to your workspace</h2>
+      <p class="muted">Your next great build starts here.</p>
+      <form method="post" class="login-form">
+        <label for="username">Username</label>
+        <div class="input-wrap"><span>♙</span><input id="username" name="username" autocomplete="username" placeholder="Enter your username" required></div>
+        <label for="password">Password</label>
+        <div class="input-wrap"><span>⌑</span><input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required><button class="show-pass" type="button" data-toggle-password="password">Show</button></div>
+        <button class="primary-btn login-btn" type="submit">Enter workspace <span>→</span></button>
+      </form>
+      <div class="demo-box"><div class="demo-dot">i</div><div><b>Demo access</b><p>Username <code>demo</code> &nbsp;·&nbsp; Password <code>codemind123</code></p></div></div>
+      <div class="login-note"><span>◈</span> Local prototype · No external API key required</div>
+    </div>
+    <div class="panel-bottom">© 2026 CodeMind AI <span>Designed for makers</span></div>
+  </section>
+</div>
+{% endblock %}

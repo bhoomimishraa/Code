@@ -1,0 +1,208 @@
+
+{% extends "base.html" %}
+
+{% block title %}Overview · CodeMind AI{% endblock %}
+{% block crumb %}Overview{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <div class="eyebrow dark-eyebrow">
+            MONDAY, BUILD SOMETHING GREAT
+        </div>
+        <h1>Welcome back, Phani Kumar!</h1>
+        <p class="muted">
+            Your personal engineering workspace, built for turning ideas into working code.
+        </p>
+    </div>
+
+    <a class="primary-btn" href="{{ url_for('workspace') }}">
+        ＋ New session
+    </a>
+</div>
+
+<section class="welcome-banner">
+    <div>
+        <div class="banner-tag">
+            PHANI KUMAR'S CODEMIND WORKSPACE
+            <span>• LOCAL MODE</span>
+        </div>
+
+        <h2>Phani Kumar, think clearly. Code confidently.</h2>
+
+        <p>
+            Write code, inspect quality, and validate functions
+            from one simple workspace.
+        </p>
+
+        <a href="{{ url_for('workspace') }}" class="banner-link">
+            Open code editor <span>→</span>
+        </a>
+    </div>
+
+    <div class="banner-orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-core">C<span>✳</span></div>
+        <div class="orbit-node node-a">{"}"}</div>
+        <div class="orbit-node node-b">✓</div>
+        <div class="orbit-node node-c">⌘</div>
+    </div>
+</section>
+
+<div class="section-title">
+    <div>
+        <h2>Workspace modules</h2>
+        <p class="muted">Your toolkit, ready when you are.</p>
+    </div>
+    <span class="subtle-count">06 MODULES</span>
+</div>
+
+<div class="module-grid">
+
+    <a class="module-card" href="{{ url_for('workspace') }}">
+        <div class="module-icon purple">⌘</div>
+        <div class="module-top">
+            <span class="module-type">EDITOR</span>
+            <span>↗</span>
+        </div>
+        <h3>Code workspace</h3>
+        <p>Write and run Python snippets in a clean editor.</p>
+        <div class="card-bottom">
+            <span class="mini-status"></span>
+            Ready to use
+        </div>
+    </a>
+
+    <a class="module-card" href="{{ url_for('analyzer') }}">
+        <div class="module-icon blue">⌕</div>
+        <div class="module-top">
+            <span class="module-type">ANALYSIS</span>
+            <span>↗</span>
+        </div>
+        <h3>Code analyzer</h3>
+        <p>Inspect syntax, style, and basic code metrics.</p>
+        <div class="card-bottom">
+            <span class="mini-status"></span>
+            Rule-based checks
+        </div>
+    </a>
+
+    <a class="module-card" href="{{ url_for('tests') }}">
+        <div class="module-icon green">✓</div>
+        <div class="module-top">
+            <span class="module-type">VALIDATION</span>
+            <span>↗</span>
+        </div>
+        <h3>Test lab</h3>
+        <p>Run sample inputs against your own functions.</p>
+        <div class="card-bottom">
+            <span class="mini-status"></span>
+            Test functions
+        </div>
+    </a>
+
+    <a class="module-card" href="{{ url_for('projects') }}">
+        <div class="module-icon orange">▤</div>
+        <div class="module-top">
+            <span class="module-type">HISTORY</span>
+            <span>↗</span>
+        </div>
+        <h3>Activity history</h3>
+        <p>Review recent executions and analysis activity.</p>
+        <div class="card-bottom">
+            <span class="mini-status"></span>
+            {{ total }} recorded actions
+        </div>
+    </a>
+
+    <div class="module-card static-card">
+        <div class="module-icon pink">◈</div>
+        <div class="module-top">
+            <span class="module-type">INSIGHTS</span>
+            <span>•</span>
+        </div>
+        <h3>Quality insights</h3>
+        <p>
+            Review line count, functions, classes,
+            and common style findings.
+        </p>
+        <div class="card-bottom">
+            Included in analyzer
+        </div>
+    </div>
+
+    <div class="module-card static-card">
+        <div class="module-icon teal">⌂</div>
+        <div class="module-top">
+            <span class="module-type">PROJECTS</span>
+            <span>•</span>
+        </div>
+        <h3>Project organization</h3>
+        <p>
+            Keep a record of your workspace sessions and results.
+        </p>
+        <div class="card-bottom">
+            Local history storage
+        </div>
+    </div>
+
+</div>
+
+<div class="lower-grid">
+
+    <section class="panel">
+        <div class="panel-heading">
+            <div>
+                <h3>Recent activity</h3>
+                <p class="muted">
+                    A quick look at your latest sessions.
+                </p>
+            </div>
+            <a href="{{ url_for('projects') }}">View history →</a>
+        </div>
+
+        {% if recent %}
+            <div class="activity-list">
+                {% for item in recent %}
+                    <div class="activity-row">
+                        <div class="activity-symbol">⌘</div>
+
+                        <div class="activity-copy">
+                            <b>{{ item.action }}</b>
+                            <small>
+                                {{ item.details or 'Workspace activity' }}
+                            </small>
+                        </div>
+
+                        <time>{{ item.created_at }}</time>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                Your activity will appear here after you run or analyze code.
+            </div>
+        {% endif %}
+    </section>
+
+    <section class="tip-panel">
+        <div class="tip-icon">✳</div>
+
+        <span class="module-type">QUICK TIP</span>
+
+        <h3>Start with a small function</h3>
+
+        <p>
+            Use the Test Lab to try several inputs and check
+            whether your function behaves as expected.
+        </p>
+
+        <a href="{{ url_for('tests') }}">
+            Go to Test Lab <span>→</span>
+        </a>
+    </section>
+
+</div>
+
+{% endblock %}

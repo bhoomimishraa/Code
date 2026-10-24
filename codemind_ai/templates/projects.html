@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Activity history · CodeMind AI{% endblock %}{% block crumb %}History{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow dark-eyebrow">YOUR WORK LOG</div><h1>Activity history</h1><p class="muted">Recent actions recorded in your local workspace database.</p></div><a class="secondary-btn" href="{{ url_for('dashboard') }}">← Dashboard</a></div>
+<section class="panel history-panel"><div class="panel-heading"><div><h3>Recent sessions</h3><p class="muted">Showing up to 50 latest actions</p></div><span class="subtle-count">{{ history|length }} RECORDS</span></div>{% if history %}<div class="history-table-wrap"><table class="history-table"><thead><tr><th>Activity</th><th>Details</th><th>Date & time</th></tr></thead><tbody>{% for item in history %}<tr><td><span class="history-icon">⌘</span>{{ item.action }}</td><td>{{ item.details or '—' }}</td><td>{{ item.created_at }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state">No activity yet. Run code or analyze a snippet to create your first record.</div>{% endif %}</section>
+{% endblock %}

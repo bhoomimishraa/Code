@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CodeMind AI{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+{% if session.get('username') %}
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">C</span><span>CodeMind <small>AI WORKSPACE</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <a class="nav-link {% if request.endpoint=='dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}">▦ <span>Overview</span></a>
+    <a class="nav-link {% if request.endpoint=='workspace' %}active{% endif %}" href="{{ url_for('workspace') }}">⌘ <span>Code editor</span></a>
+    <a class="nav-link {% if request.endpoint=='analyzer' %}active{% endif %}" href="{{ url_for('analyzer') }}">⌕ <span>Code analyzer</span></a>
+    <a class="nav-link {% if request.endpoint=='tests' %}active{% endif %}" href="{{ url_for('tests') }}">✓ <span>Test lab</span></a>
+    <a class="nav-link {% if request.endpoint=='projects' %}active{% endif %}" href="{{ url_for('projects') }}">▤ <span>History</span></a>
+    <div class="sidebar-bottom"><div class="avatar">{{ session.username[:1]|upper }}</div><div class="user-meta"><b>{{ session.username }}</b><small>Local workspace</small></div><a class="logout" href="{{ url_for('logout') }}">↗</a></div>
+  </aside>
+  <main class="main-area">
+    <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> {% block crumb %}Overview{% endblock %}</div><div class="top-actions"><span class="local-pill"><i></i> Local mode · No API key</span></div></header>
+    {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endif %}{% endwith %}
+    <div class="page-content">{% block content %}{% endblock %}</div>
+  </main>
+</div>
+{% else %}
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category,message in messages %}<div class="flash login-flash {{ category }}">{{ message }}</div>{% endfor %}{% endif %}{% endwith %}
+{% block public_content %}{% endblock %}
+{% endif %}
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body></html>
